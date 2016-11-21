@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FrameworkDemo</string>
+    <string name="A">AAA</string>
+    <string name="B">BBB</string>
+    <string name="C">CCC</string>
+    <string name="D">DDD</string>
 </resources>
