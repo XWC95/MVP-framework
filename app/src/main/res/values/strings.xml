@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">FrameworkDemo</string>
-    <string name="A">AAA</string>
-    <string name="B">BBB</string>
-    <string name="C">CCC</string>
-    <string name="D">DDD</string>
+
+
+    <string name="state_network_error">网络错误</string>
+    <string name="state_loading">正在加载…</string>
+    <string name="state_not_more">没有更多数据</string>
+    <string name="state_load_error">加载失败</string>
+    <string name="state_refreshing">正在刷新</string>
 </resources>

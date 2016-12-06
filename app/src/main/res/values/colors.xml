@@ -5,9 +5,21 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
     <color name="window_bg">#e7e7e7</color>
-    <!--Tab -->
+
+    <!--HomeTab text -->
     <color name="main_tab_text_over">#FE6A07</color>
     <color name="main_tab_text">#777777</color>
-    <color name="bar_line">#bababa</color>
+
+    <!--listView-->
+    <color name="list_divider_color">#DADADA</color>
+
+    <!-- 下拉刷新时，颜色值 -->
+    <color name="swiperefresh_color1">#ff00ddff</color>
+    <color name="swiperefresh_color2">#ffffbb33</color>
+    <color name="swiperefresh_color3">#ffff4444</color>
+    <color name="swiperefresh_color4">#ffaa66cc</color>
+    <color name="comment_reply">#9ba4a3</color>
+
 </resources>

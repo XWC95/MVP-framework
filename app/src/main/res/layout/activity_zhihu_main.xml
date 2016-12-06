@@ -4,16 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".UI.Home.activity.MainActivity">
+    tools:context=".UI.Gank.activity.GankMainActivity">
+
 
     <include layout="@layout/view_toolbar"/>
 
-
-    <FrameLayout
-        android:layout_weight="1"
-        android:id="@+id/fl_main_content"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+    <include layout="@layout/layout_viewpaget_tablayout"/>
 
 
 </LinearLayout>
