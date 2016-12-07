@@ -14,7 +14,8 @@ public class Constants {
 
     //================= TYPE ====================
     public static final int TYPE_A = 101;
-
+    public static final int TYPE_B = 102;
+    public static final int TYPE_C = 103;
 
     //================= KEY ==================== //
 

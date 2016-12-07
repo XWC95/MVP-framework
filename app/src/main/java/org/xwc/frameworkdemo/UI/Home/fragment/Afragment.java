@@ -24,7 +24,7 @@ import butterknife.BindView;
 /**
  * Created by xuwc on 2016/11/24.
  */
-public class Afragment extends BaseFragment<Apresenter> implements AContract.View, RecyclerRefreshLayout.SuperRefreshLayoutListener, BaseRecyclerAdapter.OnItemClickListener {
+public class AFragment extends BaseFragment<Apresenter> implements AContract.View, RecyclerRefreshLayout.SuperRefreshLayoutListener, BaseRecyclerAdapter.OnItemClickListener {
 
 
 
