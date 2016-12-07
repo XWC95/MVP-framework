@@ -50,8 +50,12 @@ dependencies {
     compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.orhanobut:logger:1.15'
-    compile 'me.yokeyword:fragmentation:0.7.13'
+    compile 'me.yokeyword:fragmentation:0.8.4'
     // 如果想使用SwipeBack 滑动边缘退出Fragment/Activity功能，请再添加下面的库
     compile 'me.yokeyword:fragmentation-swipeback:0.7.9'
 
+
+
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 }

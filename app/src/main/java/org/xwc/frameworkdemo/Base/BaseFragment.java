@@ -66,30 +66,41 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
         super.onViewCreated(view, savedInstanceState);
         mPresenter.attachView(this);
         mUnBinder = ButterKnife.bind(this, view);
-        if (savedInstanceState == null) {
-            if (!isHidden()) {
-                isInited = true;
-                initView();
-                initData();
-            }
-        } else {
-            if (!isSupportHidden()) {
-                isInited = true;
-                initView();
-                initData();
-            }
-        }
+
+//        if (savedInstanceState == null) {
+//            if (!isHidden()) {
+//                isInited = true;
+//                initView();
+//                initData();
+//            }
+//        } else {
+//            if (!isSupportHidden()) {
+//                isInited = true;
+//                initView();
+//                initData();
+//            }
+//        }
     }
 
+    //类库支持的懒加载
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!isInited && !hidden) {
-            isInited = true;
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        if(savedInstanceState == null ){
             initView();
             initData();
         }
     }
+
+//    @Override
+//    public void onHiddenChanged(boolean hidden) {
+//        super.onHiddenChanged(hidden);
+//        if (!isInited && !hidden) {
+//            isInited = true;
+//            initView();
+//            initData();
+//        }
+//    }
 
 
     @Override

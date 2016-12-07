@@ -40,27 +40,35 @@ public abstract class SimpleFragment extends SupportFragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mUnBinder = ButterKnife.bind(this, view);
-        if (savedInstanceState == null) {
-            if (!isHidden()) {
-                isInited = true;
-                initEventAndData();
-            }
-        } else {
-            if (!isSupportHidden()) {
-                isInited = true;
-                initEventAndData();
-            }
-        }
+//        if (savedInstanceState == null) {
+//            if (!isHidden()) {
+//                isInited = true;
+//                initEventAndData();
+//            }
+//        } else {
+//            if (!isSupportHidden()) {
+//                isInited = true;
+//                initEventAndData();
+//            }
+//        }
     }
-
+    //类库支持的懒加载
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!isInited && !hidden) {
-            isInited = true;
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+        if(savedInstanceState == null ){
             initEventAndData();
         }
     }
+
+//    @Override
+//    public void onHiddenChanged(boolean hidden) {
+//        super.onHiddenChanged(hidden);
+//        if (!isInited && !hidden) {
+//            isInited = true;
+//            initEventAndData();
+//        }
+//    }
 
     @Override
     public void onDestroyView() {
@@ -70,8 +78,6 @@ public abstract class SimpleFragment extends SupportFragment{
 
     protected abstract int getLayoutId();
     protected abstract void initEventAndData();
-
-
 
 
 }

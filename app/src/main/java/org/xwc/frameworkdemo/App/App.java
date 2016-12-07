@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.orhanobut.logger.Logger;
+import com.squareup.leakcanary.LeakCanary;
 
 import org.xwc.frameworkdemo.Dagger.Component.AppComponent;
 import org.xwc.frameworkdemo.Dagger.Component.DaggerAppComponent;
@@ -51,6 +52,8 @@ public class App extends Application{
 
         //初始化日志
         Logger.init(getPackageName()).hideThreadInfo();
+
+        LeakCanary.install(this);
 
         initGlide();
     }

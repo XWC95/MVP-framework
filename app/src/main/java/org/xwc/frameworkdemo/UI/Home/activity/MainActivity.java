@@ -42,10 +42,8 @@ public class MainActivity extends SimpleActivity implements RadioGroup.OnChecked
 
         loadMultipleRootFragment(R.id.fl_main_content, 0, mAFragment, mBFragment, mCFragment);
         mHomeRadio.setOnCheckedChangeListener(this);
-        showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
+        showHideFragment(getTargetFragment(showFragment));
     }
-
-
 
 
     @Override
@@ -61,8 +59,8 @@ public class MainActivity extends SimpleActivity implements RadioGroup.OnChecked
                 showFragment = Constants.TYPE_C;
                 break;
         }
-        showHideFragment(getTargetFragment(showFragment), getTargetFragment(hideFragment));
-        hideFragment = showFragment;
+        showHideFragment(getTargetFragment(showFragment));
+//        hideFragment = showFragment;
     }
 
 
