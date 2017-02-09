@@ -41,7 +41,6 @@ public class Apresenter   extends RxPresenter<AContract.View> implements AContra
         Flowable<WxHttpResponse<List<WxItemBean>>> flowable = mRetrofitHelper.fetchWxList(Constants.NUM_OF_PAGE, mCurrentPage +13570);
 
 
-
         ResourceSubscriber  subscriber  =  new ResourceSubscriber<WxHttpResponse<List<WxItemBean>>>(){
 
 

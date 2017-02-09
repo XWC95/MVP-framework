@@ -13,6 +13,7 @@ import butterknife.Unbinder;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
+ * 无MVP
  * Created by xuwc on 2016/12/1.
  */
 public abstract class SimpleFragment extends SupportFragment{

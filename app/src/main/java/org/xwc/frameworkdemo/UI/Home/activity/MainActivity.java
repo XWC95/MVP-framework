@@ -20,7 +20,6 @@ public class MainActivity extends SimpleActivity implements RadioGroup.OnChecked
     private BFragment mBFragment;
     private CFragment mCFragment;
 
-    private int hideFragment = Constants.TYPE_A;
     private int showFragment = Constants.TYPE_A;
 
     @BindView(R.id.toolbar)

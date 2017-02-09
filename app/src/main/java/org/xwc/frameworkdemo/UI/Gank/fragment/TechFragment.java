@@ -69,7 +69,6 @@ public class TechFragment extends BaseFragment<TechPresenter>  implements  TechC
 
     @Override
     public void showContent(List<GankItemBean> mList) {
-
         if (mRefreshLayout.isRefreshing()) {
             //cache the time
             mAdapter.clear();
