@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import org.xwc.frameworkdemo.Base.BaseRecyclerAdapter;
 import org.xwc.frameworkdemo.Model.bean.WxItemBean;
 import org.xwc.frameworkdemo.R;
+import org.xwc.frameworkdemo.Utils.ImageLoader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,11 +21,11 @@ import butterknife.ButterKnife;
 /**
  * Created by xuwc on 2016/11/25.
  */
-public class Aadapter  extends BaseRecyclerAdapter<WxItemBean> {
+public class Aadapter extends BaseRecyclerAdapter<WxItemBean> {
 
 
     public Aadapter(Context context) {
-        super(context,ONLY_FOOTER);
+        super(context, ONLY_FOOTER);
     }
 
     @Override
@@ -35,11 +36,9 @@ public class Aadapter  extends BaseRecyclerAdapter<WxItemBean> {
     @Override
     protected void onBindDefaultViewHolder(RecyclerView.ViewHolder holder, WxItemBean item, int position) {
 
-        ViewHolder h = (ViewHolder)holder;
-        Glide.with(mContext)
-                .load(item.getPicUrl())
-                .asBitmap()
-                .into(h.ivImage);
+        ViewHolder h = (ViewHolder) holder;
+        ImageLoader.loadImage(mContext, h.ivImage, item.getPicUrl());
+
         h.tvTitle.setText(item.getTitle());
         h.tvFrom.setText(item.getDescription());
         h.tvTime.setText(item.getCtime());

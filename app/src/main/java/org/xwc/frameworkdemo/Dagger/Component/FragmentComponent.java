@@ -6,7 +6,7 @@ import org.xwc.frameworkdemo.Dagger.FragmentScope;
 import org.xwc.frameworkdemo.Dagger.Modul.FragmentModule;
 import org.xwc.frameworkdemo.UI.Gank.fragment.GirlFragment;
 import org.xwc.frameworkdemo.UI.Gank.fragment.TechFragment;
-import org.xwc.frameworkdemo.UI.Home.fragment.AFragment;
+import org.xwc.frameworkdemo.UI.Home.fragment.HomeFragment;
 
 import dagger.Component;
 
@@ -17,7 +17,7 @@ public interface FragmentComponent {
     Activity getActivity();
 
 
-    void inject(AFragment fragment);
+    void inject(HomeFragment fragment);
 
     void inject(TechFragment fragment);
 

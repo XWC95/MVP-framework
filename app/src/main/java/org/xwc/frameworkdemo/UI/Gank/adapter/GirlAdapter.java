@@ -1,20 +1,12 @@
 package org.xwc.frameworkdemo.UI.Gank.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
-
-import org.xwc.frameworkdemo.App.App;
 import org.xwc.frameworkdemo.Base.BaseRecyclerAdapter;
 import org.xwc.frameworkdemo.Model.bean.GankItemBean;
 import org.xwc.frameworkdemo.R;
@@ -28,17 +20,15 @@ import butterknife.ButterKnife;
  */
 public class GirlAdapter extends BaseRecyclerAdapter<GankItemBean> {
 
-    private RequestManager  loader;
 
-    public GirlAdapter(Context context,RequestManager  loader) {
+    public GirlAdapter(Context context) {
         super(context, ONLY_FOOTER);
-        this.loader =    loader;
     }
     /**
      * 在StaggeredGridLayoutManager瀑布流中,当需要依据图片实际相对高度,不断动态设置ImageView的LayoutParams时,
      * 会导致快速滑动状态下产生重新排列,重写getItemViewType并设置StaggeredGridLayoutManager.GAP_HANDLING_NONE解决了这个问题，原因目前未知
      * https://github.com/oxoooo/mr-mantou-android/blob/master/app/src/main/java/ooo/oxo/mr/MainAdapter.java
-     * @param position
+     * @param
      * @return
      */
 //    @Override
@@ -56,7 +46,7 @@ public class GirlAdapter extends BaseRecyclerAdapter<GankItemBean> {
     protected void onBindDefaultViewHolder(RecyclerView.ViewHolder holder, GankItemBean item, int position) {
         ViewHolder h = (ViewHolder)holder;
 
-        ImageLoader.loadImage(loader,h.ivGirl,item.getUrl());
+        ImageLoader.loadImage(mContext,h.ivGirl,item.getUrl());
 
 //        //存在记录的高度时先Layout再异步加载图片
 //        if (getItems().get(h.getAdapterPosition()).getHeight() > 0) {

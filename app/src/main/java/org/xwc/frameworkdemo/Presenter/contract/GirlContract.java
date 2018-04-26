@@ -12,7 +12,7 @@ import java.util.List;
 public interface GirlContract {
 
     interface  View extends BaseView{
-        void showContent(List<GankItemBean> list);
+        void showContent(List<GankItemBean> list, boolean isRefresh);
     }
 
 

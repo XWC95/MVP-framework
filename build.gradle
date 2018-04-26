@@ -2,12 +2,13 @@
 
 buildscript {
     repositories {
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        classpath 'me.tatarka:gradle-retrolambda:3.2.4'
+        classpath 'com.android.tools.build:gradle:3.0.0'
+
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -15,6 +16,7 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         jcenter()
         maven { url "https://jitpack.io" }
     }
@@ -23,3 +25,12 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+ext.support_version = "26.1.0"
+ext.retrofit_version = "2.2.0"
+ext.dagger_version = "2.11"
+ext.glide_version = "4.5.0"
+ext.rx_java = "2.1.0"
+ext.rx_android = "2.0.1"
+ext.butterknife = "8.8.1"
+ext.fragmentation = "1.2.5"
+ext.glide = "4.3.1"

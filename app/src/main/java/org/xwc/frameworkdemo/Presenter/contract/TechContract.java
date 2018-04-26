@@ -13,7 +13,7 @@ public interface TechContract {
 
     interface View extends BaseView {
 
-        void showContent(List<GankItemBean> mList);
+        void showContent(List<GankItemBean> mList,boolean isRefresh);
 
     }
 

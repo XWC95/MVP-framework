@@ -1,6 +1,5 @@
 package org.xwc.frameworkdemo.UI.Home.fragment;
 
-
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,12 +8,15 @@ import com.orhanobut.logger.Logger;
 
 import org.xwc.frameworkdemo.Base.BaseFragment;
 import org.xwc.frameworkdemo.Base.BaseRecyclerAdapter;
+import org.xwc.frameworkdemo.Model.bean.GankItemBean;
 import org.xwc.frameworkdemo.Model.bean.WxItemBean;
 import org.xwc.frameworkdemo.Presenter.Apresenter;
 import org.xwc.frameworkdemo.Presenter.contract.AContract;
 import org.xwc.frameworkdemo.R;
 import org.xwc.frameworkdemo.UI.Gank.activity.GankMainActivity;
 import org.xwc.frameworkdemo.UI.Home.adapter.Aadapter;
+import org.xwc.frameworkdemo.UI.util.IBaseShowItemList;
+import org.xwc.frameworkdemo.UI.util.ListFactory;
 import org.xwc.frameworkdemo.Widget.RecyclerRefreshLayout;
 
 import java.util.List;
@@ -22,11 +24,12 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by xuwc on 2016/11/24.
+ * Created by xuwc on 2016/12/7.
+ * 最近修改时间 2018年4月18日16:49:24
  */
-public class AFragment extends BaseFragment<Apresenter> implements AContract.View, RecyclerRefreshLayout.SuperRefreshLayoutListener, BaseRecyclerAdapter.OnItemClickListener {
+public class HomeFragment extends BaseFragment<Apresenter> implements AContract.View, RecyclerRefreshLayout.SuperRefreshLayoutListener, BaseRecyclerAdapter.OnItemClickListener {
 
-
+    private IBaseShowItemList<WxItemBean> baseShowItemList;
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -64,23 +67,10 @@ public class AFragment extends BaseFragment<Apresenter> implements AContract.Vie
 
 
     @Override
-    public void showContent(List<WxItemBean> mList) {
+    public void showContent(List<WxItemBean> data,boolean isRefresh) {
 
-        if (mRefreshLayout.isRefreshing()) {
-            //cache the time
-            mAdapter.clear();
-            mAdapter.addAll(mList);
-            mRefreshLayout.setRefreshing(false);
-        } else {
-            mAdapter.addAll(mList);
-            mRefreshLayout.setOnLoading(false);  //设置可加加载
-        }
-        if (mList == null || mList.size() < 20) {
-            mAdapter.setState(BaseRecyclerAdapter.STATE_NO_MORE, true);
-            mRefreshLayout.setOnLoading(true);  //设置不可加更多
-        }else{
-            mAdapter.setState(BaseRecyclerAdapter.STATE_LOAD_MORE, true);
-        }
+        baseShowItemList = new ListFactory<WxItemBean>().createShowItemList(mAdapter, mRefreshLayout);
+        baseShowItemList.showData(isRefresh, data);
     }
 
     @Override
@@ -106,3 +96,4 @@ public class AFragment extends BaseFragment<Apresenter> implements AContract.Vie
 
 
 }
+

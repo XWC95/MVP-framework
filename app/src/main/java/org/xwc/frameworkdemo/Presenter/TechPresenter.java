@@ -6,6 +6,8 @@ import org.xwc.frameworkdemo.Model.bean.GankItemBean;
 import org.xwc.frameworkdemo.Model.http.GankHttpResponse;
 import org.xwc.frameworkdemo.Model.http.RetrofitHelper;
 import org.xwc.frameworkdemo.Presenter.contract.TechContract;
+import org.xwc.frameworkdemo.Utils.CommonSubscriber;
+import org.xwc.frameworkdemo.Utils.RxUtil;
 
 import java.util.List;
 
@@ -37,28 +39,15 @@ public class TechPresenter extends RxPresenter<TechContract.View> implements Tec
         } else {
             mCurrentPager++;
         }
+        addSubscription(mRetrofitHelper.fetchTechList(tech, Constants.NUM_OF_PAGE, mCurrentPager)
+                .compose(RxUtil.rxSchedulerHelper())
+                .compose(RxUtil.handleGankResult())
+                .subscribeWith(new CommonSubscriber<List<GankItemBean>>(getView()) {
+                    @Override
+                    public void onNext(List<GankItemBean> data) {
+                        getView().showContent(data, isRefresh);
+                    }
+                }));
 
-        Flowable<GankHttpResponse<List<GankItemBean>>> flowable = mRetrofitHelper.fetchTechList(tech, Constants.NUM_OF_PAGE, mCurrentPager);
-
-        ResourceSubscriber subscriber = new ResourceSubscriber<GankHttpResponse<List<GankItemBean>>>() {
-
-            @Override
-            public void onNext(GankHttpResponse<List<GankItemBean>> data) {
-                if(getView()!=null)
-                    getView().showContent(data.getResults());
-            }
-
-            @Override
-            public void onError(Throwable t) {
-                if(getView()!=null)
-                    getView().showError("数据加载失败");
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
-        addSubscription(mRetrofitHelper.startObservable(flowable,subscriber));
     }
 }

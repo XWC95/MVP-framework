@@ -12,7 +12,7 @@ import java.util.List;
 public interface AContract {
 
     interface View extends BaseView {
-        void showContent(List<WxItemBean> mList);
+        void showContent(List<WxItemBean> mList,boolean isRefresh);
     }
 
     interface Presenter extends BasePresenter<View> {

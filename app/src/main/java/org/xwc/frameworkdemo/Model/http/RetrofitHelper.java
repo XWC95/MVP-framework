@@ -85,19 +85,19 @@ public class RetrofitHelper {
                 return response;
             }
         };
-        Interceptor apikey = new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                request = request.newBuilder()
-                        .addHeader("apikey", Constants.KEY_API)
-                        .build();
-                return chain.proceed(request);
-            }
-        };
+//        Interceptor apikey = new Interceptor() {
+//            @Override
+//            public Response intercept(Chain chain) throws IOException {
+//                Request request = chain.request();
+//                request = request.newBuilder()
+//                        .addHeader("apikey", Constants.KEY_API)
+//                        .build();
+//                return chain.proceed(request);
+//            }
+//        };
         builder.addNetworkInterceptor(cacheInterceptor);
         builder.addInterceptor(cacheInterceptor);
-        builder.addInterceptor(apikey);
+//        builder.addInterceptor(apikey);
         builder.cache(cache);
         //设置超时
         builder.connectTimeout(10, TimeUnit.SECONDS);
@@ -117,6 +117,7 @@ public class RetrofitHelper {
                 .build();
         return gankRetrofit.create(WxApis.class);
     }
+
     private static GankApis getGankApiService() {
         Retrofit gankRetrofit = new Retrofit.Builder()
                 .baseUrl(GankApis.HOST)
@@ -129,17 +130,18 @@ public class RetrofitHelper {
 
     /**
      * 初始化通用的观察者
+     *
      * @param observable 观察者
      */
     public ResourceSubscriber startObservable(Flowable observable, ResourceSubscriber subscriber) {
-        return (ResourceSubscriber)observable.subscribeOn(Schedulers.io())
+        return (ResourceSubscriber) observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(subscriber);
     }
 
 
     public Flowable<WxHttpResponse<List<WxItemBean>>> fetchWxList(int num, int page) {
-        return sWxService.getWXHot( num, page);
+        return sWxService.getWXHot(Constants.KEY_API, num, page);
     }
 
     public Flowable<GankHttpResponse<List<GankItemBean>>> fetchTechList(String tech, int num, int page) {
@@ -149,7 +151,6 @@ public class RetrofitHelper {
     public Flowable<GankHttpResponse<List<GankItemBean>>> fetchGirlList(int num, int page) {
         return sGankApiService.getGirlList(num, page);
     }
-
 
 
 }

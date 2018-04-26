@@ -13,6 +13,8 @@ import org.xwc.frameworkdemo.Presenter.GirlPresenter;
 import org.xwc.frameworkdemo.Presenter.contract.GirlContract;
 import org.xwc.frameworkdemo.R;
 import org.xwc.frameworkdemo.UI.Gank.adapter.GirlAdapter;
+import org.xwc.frameworkdemo.UI.util.IBaseShowItemList;
+import org.xwc.frameworkdemo.UI.util.ListFactory;
 import org.xwc.frameworkdemo.Utils.LogUtil;
 import org.xwc.frameworkdemo.Widget.RecyclerRefreshLayout;
 
@@ -28,6 +30,7 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
 
     private GirlAdapter mAdapter;
 
+    private IBaseShowItemList<GankItemBean> baseShowItemList;
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -47,9 +50,9 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
     @Override
     protected void initView() {
         mRefreshLayout.setSuperRefreshLayoutListener(this);
-        GridLayoutManager layoutManager = new GridLayoutManager(mActivity,2);
+        GridLayoutManager layoutManager = new GridLayoutManager(mActivity, 2);
         mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new GirlAdapter(mActivity, Glide.with(this));
+        mAdapter = new GirlAdapter(mActivity);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
     }
@@ -68,27 +71,18 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
     }
 
     @Override
-    public void showContent(List<GankItemBean> list) {
-        if (mRefreshLayout.isRefreshing()) {
-            //cache the time
-            mAdapter.clear();
-            mAdapter.addAll(list);
-            mRefreshLayout.setRefreshing(false);
-        } else {
-            mAdapter.addAll(list);
-            mRefreshLayout.setOnLoading(false);  //设置可加加载
-        }
-        if (list == null || list.size() < 20) {
-            mAdapter.setState(BaseRecyclerAdapter.STATE_NO_MORE, true);
-            mRefreshLayout.setOnLoading(true);  //设置不可加更多
-        }else{
-            mAdapter.setState(BaseRecyclerAdapter.STATE_LOAD_MORE, true);
-        }
+    public void showContent(List<GankItemBean> list, boolean isRefresh) {
+
+        baseShowItemList = new ListFactory<GankItemBean>().createShowItemList(mAdapter, mRefreshLayout);
+        baseShowItemList.showData(isRefresh, list);
+
     }
+
     @Override
     public void onItemClick(int position, long itemId) {
         Toast.makeText(mActivity, "点", Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public void onRefreshing() {
         mPresenter.getGirlData(true);

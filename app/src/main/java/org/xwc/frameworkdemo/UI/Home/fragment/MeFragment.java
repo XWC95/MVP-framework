@@ -13,7 +13,7 @@ import me.yokeyword.fragmentation.SupportFragment;
 /**
  * Created by xuwc on 2016/12/7.
  */
-public class CFragment extends SupportFragment{
+public class MeFragment extends SupportFragment{
 
     @Nullable
     @Override

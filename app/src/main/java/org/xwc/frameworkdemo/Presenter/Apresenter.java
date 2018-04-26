@@ -6,6 +6,8 @@ import org.xwc.frameworkdemo.Model.bean.WxItemBean;
 import org.xwc.frameworkdemo.Model.http.RetrofitHelper;
 import org.xwc.frameworkdemo.Model.http.WxHttpResponse;
 import org.xwc.frameworkdemo.Presenter.contract.AContract;
+import org.xwc.frameworkdemo.Utils.CommonSubscriber;
+import org.xwc.frameworkdemo.Utils.RxUtil;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ import io.reactivex.subscribers.ResourceSubscriber;
 /**
  * Created by xuwc on 2016/11/24.
  */
-public class Apresenter   extends RxPresenter<AContract.View> implements AContract.Presenter{
+public class Apresenter extends RxPresenter<AContract.View> implements AContract.Presenter {
 
     private int mCurrentPage = 1;
 
@@ -32,36 +34,21 @@ public class Apresenter   extends RxPresenter<AContract.View> implements AContra
 
     @Override
     public void getGankData(Boolean isRefresh) {
-        if(isRefresh){
+        if (isRefresh) {
             mCurrentPage = 1;
-        }else{
-             mCurrentPage++;
+        } else {
+            mCurrentPage++;
         }
 
-        Flowable<WxHttpResponse<List<WxItemBean>>> flowable = mRetrofitHelper.fetchWxList(Constants.NUM_OF_PAGE, mCurrentPage +13570);
 
-
-        ResourceSubscriber  subscriber  =  new ResourceSubscriber<WxHttpResponse<List<WxItemBean>>>(){
-
-
-            @Override
-            public void onNext(WxHttpResponse<List<WxItemBean>> data) {
-                 if(getView()!=null)
-                     getView().showContent(data.getNewslist());
-            }
-
-            @Override
-            public void onError(Throwable t) {
-                if(getView()!=null)
-                getView().showError("数据加载失败");
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
-
-        addSubscription(mRetrofitHelper.startObservable(flowable,subscriber));
+        addSubscription(mRetrofitHelper.fetchWxList(Constants.NUM_OF_PAGE, mCurrentPage)
+                .compose(RxUtil.rxSchedulerHelper())
+                .compose(RxUtil.handleWxResult())
+                .subscribeWith(new CommonSubscriber<List<WxItemBean>>(getView()) {
+                    @Override
+                    public void onNext(List<WxItemBean> wxItemBeans) {
+                        getView().showContent(wxItemBeans, isRefresh);
+                    }
+                }));
     }
 }

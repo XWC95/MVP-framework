@@ -12,14 +12,10 @@ public class Constants {
 
     public static final int NUM_OF_PAGE = 20;
 
-    //================= TYPE ====================
-    public static final int TYPE_A = 101;
-    public static final int TYPE_B = 102;
-    public static final int TYPE_C = 103;
 
     //================= KEY ==================== //
 
-    public static final String KEY_API = "f95283476506aa756559dd28a56f0c0b"; //需要APIKEY请去 http://apistore.baidu.com/ 申请,复用会减少访问可用次数
+    public static final String KEY_API = "56706566e1c318d932fd755e80d6776a";
 
     //TechFragment budle 传值key
     public static final String KEY_BUNDLE_TECH_FRAGMENT = "tech";

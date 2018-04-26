@@ -13,6 +13,8 @@ import org.xwc.frameworkdemo.Presenter.TechPresenter;
 import org.xwc.frameworkdemo.Presenter.contract.TechContract;
 import org.xwc.frameworkdemo.R;
 import org.xwc.frameworkdemo.UI.Gank.adapter.TechAdapter;
+import org.xwc.frameworkdemo.UI.util.IBaseShowItemList;
+import org.xwc.frameworkdemo.UI.util.ListFactory;
 import org.xwc.frameworkdemo.Widget.RecyclerRefreshLayout;
 
 import java.util.List;
@@ -33,6 +35,7 @@ public class TechFragment extends BaseFragment<TechPresenter>  implements  TechC
     @BindView(R.id.swipe_refresh)
     RecyclerRefreshLayout mRefreshLayout;
 
+    private IBaseShowItemList<GankItemBean> baseShowItemList;
     @Override
     protected void initInject() {
         getFragmentComponent().inject(this);
@@ -68,22 +71,10 @@ public class TechFragment extends BaseFragment<TechPresenter>  implements  TechC
     }
 
     @Override
-    public void showContent(List<GankItemBean> mList) {
-        if (mRefreshLayout.isRefreshing()) {
-            //cache the time
-            mAdapter.clear();
-            mAdapter.addAll(mList);
-            mRefreshLayout.setRefreshing(false);
-        } else {
-            mAdapter.addAll(mList);
-            mRefreshLayout.setOnLoading(false);  //设置可加加载
-        }
-        if (mList == null || mList.size() < 20) {
-            mAdapter.setState(BaseRecyclerAdapter.STATE_NO_MORE, true);
-            mRefreshLayout.setOnLoading(true);  //设置不可加更多
-        }else{
-            mAdapter.setState(BaseRecyclerAdapter.STATE_LOAD_MORE, true);
-        }
+    public void showContent(List<GankItemBean> mList,boolean isRefresh) {
+        baseShowItemList = new ListFactory<GankItemBean>().createShowItemList(mAdapter, mRefreshLayout);
+        baseShowItemList.showData(isRefresh, mList);
+
     }
 
     @Override

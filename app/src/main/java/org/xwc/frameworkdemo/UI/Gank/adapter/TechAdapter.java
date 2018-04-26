@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.xwc.frameworkdemo.Base.BaseRecyclerAdapter;
-import org.xwc.frameworkdemo.Model.bean.GankItemBean;
 import org.xwc.frameworkdemo.R;
 import org.xwc.frameworkdemo.Utils.StringUtils;
 
@@ -18,7 +17,7 @@ import butterknife.ButterKnife;
 /**
  * Created by xuwc on 2016/11/30.
  */
-public class TechAdapter extends BaseRecyclerAdapter<GankItemBean>{
+public class TechAdapter extends BaseRecyclerAdapter<org.xwc.frameworkdemo.Model.bean.GankItemBean>{
 
     public TechAdapter(Context context ) {
         super(context, ONLY_FOOTER);
@@ -31,7 +30,7 @@ public class TechAdapter extends BaseRecyclerAdapter<GankItemBean>{
     }
 
     @Override
-    protected void onBindDefaultViewHolder(RecyclerView.ViewHolder holder, GankItemBean item, int position) {
+    protected void onBindDefaultViewHolder(RecyclerView.ViewHolder holder, org.xwc.frameworkdemo.Model.bean.GankItemBean item, int position) {
 
         ViewHolder h = (ViewHolder)holder;
         h.tvContent.setText(item.getDesc());

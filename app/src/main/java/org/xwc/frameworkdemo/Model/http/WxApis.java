@@ -15,12 +15,12 @@ import retrofit2.http.Query;
 public interface WxApis {
 
 
-    String HOST = "http://apis.baidu.com/txapi/weixin/";
+    String HOST = "http://api.tianapi.com/";
 
     /**
      * 技术文章列表
      */
-    @GET("wxhot")
-    Flowable<WxHttpResponse<List<WxItemBean>>> getWXHot(@Query("num") int num, @Query("page") int page);
+    @GET("wxnew")
+    Flowable<WxHttpResponse<List<WxItemBean>>> getWXHot(@Query("key") String key,@Query("num") int num, @Query("page") int page);
 
 }
