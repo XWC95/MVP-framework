@@ -353,7 +353,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
             RecyclerView.ViewHolder holder = (RecyclerView.ViewHolder) v.getTag();
-            onClick(holder.getAdapterPosition(), holder.getItemId());
+            if(holder.getAdapterPosition() != -1){
+                onClick(holder.getAdapterPosition(), holder.getItemId());
+            }
         }
 
         public abstract void onClick(int position, long itemId);
